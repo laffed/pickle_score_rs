@@ -42,12 +42,14 @@ fn point(state: &mut ScoreState) {
             state.grid_blue = flip_grid(state.grid_blue);
         }
     }
+    println!("Point.")
 }
 
 fn break_point(state: &mut ScoreState) {
     match state.serving_rank {
         ServingRank::First => {
             state.serving_rank = ServingRank::Second;
+            println!("[Block Point]: 2nd Serve");
         }
         ServingRank::Second => {
             state.serving_rank = ServingRank::First;
@@ -59,6 +61,7 @@ fn break_point(state: &mut ScoreState) {
                     state.serving_team = TeamFlag::Red;
                 }
             }
+            println!("[Break Point]: Side Out");
         }
     }
 }
@@ -75,12 +78,12 @@ fn main() {
 
     println!("Game Start!");
     println!("Score: 0, 0, 2");
-    println!("       B{:?}", state.grid_blue);
-    println!("       R{:?}", state.grid_red);
+    println!("       Blu{:?}", state.grid_blue);
+    println!("       Red{:?} <- Serving Side", state.grid_red);
 
     loop {
         let mut input = String::new();
-        println!("Input Scoring Side");
+        println!("");
 
         io::stdin()
             .read_line(&mut input)
@@ -122,12 +125,12 @@ fn main() {
         println!("Score: {}, {}, {}", f_score, s_score, r_score);
         match state.serving_team {
             TeamFlag::Red => {
-                println!("       B{:?}", state.grid_blue);
-                println!("       R{:?}", state.grid_red);
+                println!("       Blu{:?}", state.grid_blue);
+                println!("       Red{:?}", state.grid_red);
             }
             TeamFlag::Blue => {
-                println!("       R{:?}", state.grid_red);
-                println!("       B{:?}", state.grid_blue);
+                println!("       Red{:?}", state.grid_red);
+                println!("       Blu{:?}", state.grid_blue);
             }
         }
     }

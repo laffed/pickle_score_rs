@@ -22,12 +22,9 @@ fn main() {
             }
         }
 
-        match score.is_game_over() {
-            Some(winner) => {
-                println!("Game over! Winner is: {:?}", winner);
-                break;
-            }
-            None => continue,
+        if let Some(winner) = score.is_game_over() {
+            println!("Game over! Winner is: {:?}", winner);
+            break;
         }
     }
 }
